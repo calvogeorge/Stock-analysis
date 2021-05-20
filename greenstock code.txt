@@ -1,0 +1,63 @@
+Sub MacroCheck()
+    Dim testMessage As String
+
+    testMessage = "Hello World"
+
+    MsgBox (testMessage)
+
+End Sub
+
+Sub DQAnalysis()
+
+    Worksheets("DQ Analysis").Activate
+    
+    Range("A1").Value = "DAQO (Ticker: DQ)"
+    
+    'Create new header row
+    
+    Cells(3, 1).Value = "Year"
+    
+    Cells(3, 2).Value = "Total Daily Volume"
+    
+    Cells(3, 3).Value = "Return"
+    
+    
+   
+End Sub
+
+Sub DQAnalysis_1()
+ 
+ Worksheets("2018").Activate
+    
+    'Display title row data in worksheet 2018
+    For i = 1 To 8
+        MsgBox (Cells(1, i))
+    Next i
+    
+    
+    RowStart = 2
+    RowEnd = Cells(Rows.Count, 1).End(xlUp).Row
+    totalVolume = 0
+    
+    For i = RowStart To RowEnd
+        
+        ' increase total volume if ticket is "DQ"
+        If Cells(i, 1).Value = "DQ" Then
+        totalVolume = totalVolume + Cells(i, 8).Value
+        End If
+        
+    Next i
+
+    MsgBox (totalVolume)
+    
+    'add totalVolume to DQ Analisys Worksheet
+    
+    Worksheets("DQ Analysis").Activate
+    
+    ' Cell A4
+    Cells(4, 1).Value = 2018
+    ' Cell B4
+    Cells(4, 2).Value = totalVolume
+    
+
+End Sub
